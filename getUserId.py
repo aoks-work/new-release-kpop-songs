@@ -74,15 +74,17 @@ def get_track_info(albums_uri):
 
 # メイン
 
-# アーティスト名
-artist_name = input("アーティスト名：")
-# アーティストID
-artist_id = get_artist_id(artist_name)
-# アルバム情報
-album_info = get_artist_albums(artist_id, "album")
-# シングル情報
-single_info = get_artist_albums(artist_id, "single")
+# # アーティスト名
+# artist_name = input("アーティスト名：")
+# # アーティストID
+# artist_id = get_artist_id(artist_name)
+# # アルバム情報
+# album_info = get_artist_albums(artist_id, "album")
+# # シングル情報
+# single_info = get_artist_albums(artist_id, "single")
 
-# 最新音源情報
-new_release = compare_release_date(album_info, single_info)
-get_track_info(new_release["uri"])
+# # 最新音源情報
+# new_release = compare_release_date(album_info, single_info)
+# get_track_info(new_release["uri"])
+
+print(sp.user("たしまん"))
