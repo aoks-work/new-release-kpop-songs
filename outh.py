@@ -5,7 +5,7 @@ import config
 
 #spotifyインスタンスを作成
 # 認証情報を取得するためのオブジェクトを作成
-scope = 'user-read-recently-played playlist-read-private playlist-read-collaborative app-remote-control user-read-playback-state user-library-read user-modify-playback-state playlist-modify-public playlist-modify-private'
+scope = 'playlist-read-private playlist-read-collaborative playlist-modify-private user-library-read playlist-modify-public '
 redirect_uri="http://localhost:8080"
 sp_oauth = SpotifyOAuth(client_id=config.CLIENT_ID,
                         client_secret=config.CLIENT_SECRET,
@@ -13,7 +13,7 @@ sp_oauth = SpotifyOAuth(client_id=config.CLIENT_ID,
 
 # ユーザーに認証を求めるために認証ページのURLを表示
 auth_url = sp_oauth.get_authorize_url()
-print(auth_url)
+#print(auth_url)
 
 # ユーザーが認証後、自動的にアクセストークンを取得
 token_info = sp_oauth.get_cached_token()

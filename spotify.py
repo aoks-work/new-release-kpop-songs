@@ -6,36 +6,7 @@ import gsheet
 import create_playlist
 import outh
 
-# #spotifyインスタンスを作成
-# # 認証情報を取得するためのオブジェクトを作成
-# scope = 'user-read-recently-played playlist-read-private playlist-read-collaborative app-remote-control user-read-playback-state user-library-read user-modify-playback-state playlist-modify-public playlist-modify-private'
-# redirect_uri="http://localhost:8080"
-# sp_oauth = SpotifyOAuth(client_id=config.CLIENT_ID,
-#                         client_secret=config.CLIENT_SECRET,
-#                           redirect_uri=redirect_uri, scope=scope)
-
-# # ユーザーに認証を求めるために認証ページのURLを表示
-# auth_url = sp_oauth.get_authorize_url()
-# print(auth_url)
-
-# # ユーザーが認証後、自動的にアクセストークンを取得
-# token_info = sp_oauth.get_cached_token()
-# if not token_info:
-#     response = input("Enter the URL you were redirected to: ")
-#     code = sp_oauth.parse_response_code(response)
-#     token_info = sp_oauth.get_access_token(code)
-
-# # アクセストークンを取得し、認証オブジェクトを作成
-# token = token_info['access_token']
-sp = outh.sp  # sp変数を定義
-
-#playlists = sp.current_user_playlists()
-
-# results = sp.search(q="LE SSERAFIM", limit=1, type="track")
-# print(type(results))
-#pprint.pprint(results)
-# print(di['items']['name'])
-
+sp = outh.sp
 
 print("=======================================")
 # アーティストID取得
@@ -54,8 +25,6 @@ def get_artist_id(artist_name):
 def get_artist_albums(artist_id, album_type):
     results = sp.artist_albums(artist_id, album_type=album_type, limit=1)
     print("アルバム情報の取得:" + album_type)
-    #print(results["items"]["album_group"])
-    
     for item in results["items"]:
         print(item["release_date"] + " : "  + item["name"] + " : " + item["album_type"] + " : " + item["artists"][0]["name"])
         print()
@@ -80,16 +49,12 @@ def get_track_info(albums_uri):
     results = sp.album_tracks(albums_uri)
     return results
 
-#2Xiaplc23BureS4EDeE8xa
-
 # プレイリストに曲を追加
 def add_playlist_track(track):
     print("プレイリストに曲を追加")
     for track_info in track["items"]:
         print(track_info["id"])
         sp.user_playlist_add_tracks(config.USER_NAME, create_playlist.get_playlists_id(), track_info["id"])
-
-# メイン
 
 # アーティスト名
 artist_name = input("アーティスト名：")
@@ -106,11 +71,3 @@ new_release = compare_release_date(album_info, single_info)
 track = get_track_info(new_release["uri"])
 
 gsheet.createAlbumInfo(new_release, track)
-
-
-# プレイリストに曲を追加
-# add_playlist_track(track)
-
-#print(sp.user("たしまん"))
-
-# ARTIST_ID
